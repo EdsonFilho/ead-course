@@ -1,6 +1,8 @@
 
 server:
   port: 8082
+  servlet:
+    context-path: '/ead-course/'
 
 spring:
   banner:
@@ -34,7 +36,7 @@ logging:
 ead:
   api:
     url:
-      authuser: 'http://ead-authuser-service'
+      authuser: 'http://ead-authuser-service/ead-authuser'
 
 eureka:
   client:

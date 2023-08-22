@@ -31,18 +31,18 @@ public class CourseUserController {
     AuthUserClient authUserClient;
 
     @Autowired
-    AuthUserClient courseClient;
-
-    @Autowired
     CourseService courseService;
 
     @Autowired
     CourseUserService courseUserService;
 
     @GetMapping("/courses/{courseId}/users")
-    public ResponseEntity<Page<UserDto>> getAllUsersByCourse(@PageableDefault(sort = "userId") Pageable pageable, @PathVariable(value = "courseId") UUID courseId){
-
-        return ResponseEntity.status(HttpStatus.OK).body(courseClient.getAllUsersByCourse(courseId, pageable));
+    public ResponseEntity<Object> getAllUsersByCourse(@PageableDefault(sort = "userId") Pageable pageable, @PathVariable(value = "courseId") UUID courseId){
+        if(!courseUserService.existsByCourseId(courseId)) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("course not found");
+        } else {
+            return ResponseEntity.status(HttpStatus.OK).body(authUserClient.getAllUsersByCourse(courseId, pageable));
+        }
     }
 
     @PostMapping("/courses/{courseId}/users/subscription")

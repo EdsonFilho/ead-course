@@ -67,6 +67,10 @@ public class AuthUserClient {
         courseUserDto.setUserId(userId);
 
         String r =  restTemplate.postForObject(url, courseUserDto,String.class);
+    }
 
+    public void deleteAllByCourseId(UUID courseId) {
+        String url = authuserUri + "/users/courses/" + courseId;
+        restTemplate.exchange(url, HttpMethod.DELETE, null, String.class);
     }
 }

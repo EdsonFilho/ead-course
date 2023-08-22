@@ -20,8 +20,14 @@ public class CourseUserServiceImpl implements CourseUserService {
     @Autowired
     AuthUserClient authUserClient;
 
+    @Override
     public boolean existsByCourseAndUserId(CourseModel courseModel, UUID userId){
         return courseUserRepository.existsByCourseAndUserId(courseModel, userId);
+    }
+
+    @Override
+    public boolean existsByCourseId(UUID courseId){
+        return courseUserRepository.existsByCourseCourseId(courseId);
     }
 
     @Override
